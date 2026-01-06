@@ -1,6 +1,6 @@
 import './style.css';
 
-const URL = "https://emojihub.yurace.pro/api/random/group/face-positive";
+const URL = "https://emojihub.yurace.pro/api/all";
 
 async function getData(URL) {
   try {
