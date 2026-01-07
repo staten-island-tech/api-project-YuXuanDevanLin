@@ -4,22 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Emoji List</title>
+    <title>Emoji Explorer</title>
   </head>
 
   <body>
-    <div id="app">
-      <h1>Emoji List</h1>
 
-      <input 
-        id="searchInput" 
-        type="text"
-        placeholder="Search for an emoji"
-      />
+  <main>
+    <h1>Emoji Explorer</h1>
 
-      <button id="searchBtn">Search</button>
-    </div>
+    <form id="searchForm">
+      <label for="group">Choose a group:</label>
+      <select id="group">
+        <option value="">All</option>
+        <option value="face positive">Face Positive</option>
+        <option value="food fruit">Food & Fruit</option>
+      </select>
 
-    <script type="module" src="/src/main.js"></script>
-  </body>
+      <button type="submit">Search</button>
+    </form>
+
+    <section id="emojiContainer"></section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
