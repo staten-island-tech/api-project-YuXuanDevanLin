@@ -2,80 +2,97 @@ import './style.css';
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  
   const API_URL = "https://emojihub.yurace.pro/api/all";
 
   const emojiContainer = document.getElementById("emojiContainer");
   const form = document.getElementById("searchForm");
   const groupSelect = document.getElementById("group");
 
+  const modal = document.getElementById("modal");
+  const modalEmoji = document.getElementById("modalEmoji");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalCategory = document.getElementById("modalCategory");
+  const modalGroup = document.getElementById("modalGroup");
+  const closeModal = document.getElementById("closeModal");
+
   let emojiData = [];
 
-
+  // --------------------
+  // FETCH API
+  // --------------------
   async function getData(url) {
-    try {
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error("API request failed");
-      }
-
-      const data = await response.json();
-      return data;
-
-    } catch (error) {
-      console.error(error);
-      emojiContainer.textContent = "Error loading emojis.";
-    }
+    const response = await fetch(url);
+    return await response.json();
   }
 
-
+  // --------------------
+  // INITIAL LOAD
+  // --------------------
   async function init() {
     emojiData = await getData(API_URL);
-
-    if (emojiData && emojiData.length > 0) {
-      displayEmojis(emojiData.slice(0, 20));
-    }
+    displayEmojis(emojiData.slice(0, 40));
   }
 
   init();
 
-
+  // --------------------
+  // DISPLAY EMOJIS
+  // --------------------
   function displayEmojis(emojis) {
     emojiContainer.innerHTML = "";
 
     emojis.forEach((emoji) => {
       const span = document.createElement("span");
       span.innerHTML = emoji.htmlCode[0];
-      span.style.fontSize = "2rem";
-      span.style.margin = "5px";
+      span.style.margin = "9px";
+      span.style.fontSize = "3.8rem";
+      span.className =
+        "text-3xl cursor-pointer transition-transform hover:scale-125 ";
+
+      span.addEventListener("click", () => {
+        modalEmoji.innerHTML = emoji.htmlCode[0];
+        modalTitle.textContent = emoji.name;
+        modalCategory.textContent = `Category: ${emoji.category}`;
+        modalGroup.textContent = `Group: ${emoji.group}`;
+        modal.classList.remove("hidden");
+      });
+
       emojiContainer.appendChild(span);
     });
   }
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
+  // --------------------
+  // SEARCH / FILTER
+  // --------------------
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  const selectedGroup = groupSelect.value;
+    const selectedGroup = groupSelect.value;
 
-  // If the user selects "All", display all emojis
-  if (selectedGroup === "") {
-    alert("Please select a group");
-    return;
-  }
+    if (selectedGroup === "") {
+      alert("Please select a group");
+      return;
+    }
 
-  if (selectedGroup === "all") {
-    // If "All" is selected, display all emojis
-    displayEmojis(emojiData);
-  } else {
-    // Filter the emojis by the selected group
-    const filteredEmojis = emojiData.filter(
-      (emoji) => emoji.group === selectedGroup
-    );
-    displayEmojis(filteredEmojis);
-  }
+    if (selectedGroup === "all") {
+      displayEmojis(emojiData);
+    } else {
+      const filtered = emojiData.filter(
+        (emoji) => emoji.group === selectedGroup
+      );
+      displayEmojis(filtered);
+    }
+  });
+
+  // --------------------
+  // CLOSE MODAL
+  // --------------------
+  closeModal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
 });
-});
+
 
 
 //the information below is just for if i need it later

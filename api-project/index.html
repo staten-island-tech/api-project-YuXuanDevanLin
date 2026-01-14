@@ -7,14 +7,20 @@
     <title>Emoji Explorer</title>
   </head>
 
-  <body>
+  <body class="bg-repeat bg-auto bg-top min-h-screen" style="background-image: url(https://images.hindustantimes.com/rf/image_size_960x540/HT/p2/2018/07/21/Pictures/_d6c5a6cc-8cab-11e8-a23e-bc16ac6b2c17.jpg);">
 
-  <main>
-    <h1>Emoji Explorer</h1>
+    <div class="fixed top-0 left-0 w-full h-full bg-blue-500/40 z-0"></div>
 
-    <form id="searchForm">
-      <label for="group">Choose a group:</label>
-      <select id="group">
+  <main class="max-w-7xl min-h-screen mx-auto bg-blue-200 relative z-10 p-4 rounded-lg shadow-lg">
+  <h1 class="text-5xl font-bold mb-4 text-center bg-blue-400/20 py-4 rounded ">Emoji Explorer</h1>
+
+  <p class="text-sm text-gray-600 mx-4">
+⚠️ Emoji appearance may vary by device and browser ⚠️
+</p>
+
+  <form class="flex flex-col sm:flex-row gap-2 my-4 mx-4" id="searchForm">
+      <label for="group" class=" bg-blue-300 px-1  rounded border-1 border-blue-400">Choose a group:</label>
+      <select id="group" class=" bg-blue-100 px-1  rounded hover:bg-blue-300 border-1 border-blue-400">
         <option value="">Select</option>
         <option value="all">All</option>
         <option value="face positive">Face Positive</option>
@@ -28,13 +34,60 @@
         <option value="person">Person</option>
         <option value="person role">Person Role</option>
         <option value="person gesture">Person Gesture</option>
+        <option value="person activity">Person Activity</option>
+        <option value="family">Family</option>
+        <option value="skin tone">Skin Tone</option>
+        <option value="body">Body</option>
+        <option value="emotion">Emotion</option>
+        <option value="clothing">Clothing</option>
+        <option value="animal mammal">Animal Mammal</option>
+        <option value="animal bird">Animal Bird</option>
+        <option value="animal amphibian">Animal Amphibian</option>
+        <option value="animal reptile">Animal Reptile</option>
+        <option value="animal marine">Animal Marine</option>
+        <option value="animal bug">Animal Bug</option>
+        <option value="plant flower">Plant Flower</option>
+        <option value="plant other">Plant Other</option>
+        <option value="food fruit">Food Fruit</option>
+        <option value="food vegetable">Food Vegetable</option>
+        <option value="food prepared">Food Prepared</option>
+        <option value="food Asian">Food Asian</option>
+        <option value="food marine">Food Marine</option>
+        <option value="food sweet">Food Sweet</option>
+        <option value="drink">Drink</option>
+        <option value="dishware">Dishware</option>
+        <option value="travel and places">Travel and Places</option>
+        <option value="activities">Activities</option>
+        <option value="objects">Objects</option>
+        <option value="symbols">Symbols</option>
+        <option value="flags">Flags</option>
       </select>
 
-      <button type="submit">Search</button>
+      <button type="submit" class=" bg-blue-300 px-1  rounded hover:bg-blue-400 border-1 border-blue-400">Search</button>
     </form>
 
-    <section id="emojiContainer"></section>
+    <section
+  id="emojiContainer"
+  class="flex flex-wrap justify-center gap-2 mx-4"
+></section>
+
   </main>
+
+  <div id="modal" class="hidden fixed inset-0 bg-black/20 flex items-center justify-center z-11">
+  <div class="bg-white p-6 rounded-xl max-w-sm w-full text-center shadow-xl">
+
+    <div id="modalEmoji" class="text-5xl mb-2"></div>
+
+    <h2 id="modalTitle" class="font-bold text-lg mb-2"></h2>
+
+    <p id="modalCategory" class="text-sm"></p>
+    <p id="modalGroup" class="text-sm"></p>
+
+    <button id="closeModal" class="mt-4 bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
+      Close
+    </button>
+  </div>
+</div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
